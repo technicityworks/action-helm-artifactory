@@ -114,7 +114,6 @@ elif [ "$COMMAND" == "lookup" ]; then
     fi
     CHART_REPO=${PASSTHRU[2]}
     CHART_NAME=$(grep '^name:' "$CHART_PATH/Chart.yaml" | cut -d':' -f 2 | tr -d '"' | tr -d ' ')
-    echo $CHART_NAME
     PUBLISHED=$(helm search repo "$CHART_REPO"/"$CHART_NAME" -o json | cut -d '"' -f 8)
     if [ "$CHART_REPO" == "" ]; then
         echo "Chart repo not provided, will search for '$CHART_NAME' on all repos"
