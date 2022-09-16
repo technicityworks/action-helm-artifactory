@@ -56,7 +56,8 @@ install_artifactory_plugin() {
 install_versio_plugin() {
     print_title "Install helm versio plugin"
     if ! (helm plugin list | grep -q versio); then
-        helm plugin install versio-helm-plugin
+        PLUGIN_DIR=$(dirname -- "$(readlink -f "${BASH_SOURCE[0]}" || realpath "${BASH_SOURCE[0]}")")
+        helm plugin install "$PLUGIN_DIR/versio-helm-plugin"
     fi
 }
 
