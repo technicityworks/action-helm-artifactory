@@ -1,4 +1,4 @@
-name: "Helm Artifactory Publisher"
+name: "TechnicityWorks Helm Artifactory Publisher"
 description: GitHub Action for packaging, testing helm charts and publishing to Artifactory helm repo'
 branding:
   icon: archive
