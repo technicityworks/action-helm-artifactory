@@ -75,7 +75,7 @@ helm_lint() {
     print_title "Linting"
     helm lint "${CHART_DIR}"
     helm repo add target "${ARTIFACTORY_URL}" --username "${ARTIFACTORY_USERNAME}" --password "${ARTIFACTORY_PASSWORD}"
-    helm versio lookup "${CHART_DIR}" target
+    helm versio validate "${CHART_DIR}" target
 }
 
 helm_package() {
