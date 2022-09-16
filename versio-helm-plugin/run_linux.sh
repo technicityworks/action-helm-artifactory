@@ -50,10 +50,10 @@ if [ "$COMMAND" == "increment" ]; then
         echo "Chart path was not provided"
         exit 1
     fi
-    CURRENT=`cat "$CHART_PATH/Chart.yaml" | grep '^version:' | cut -d':' -f 2 | tr -d '"' | tr -d ' '`
+    CURRENT="$(cat "$CHART_PATH/Chart.yaml" | grep '^version:' | cut -d':' -f 2 | tr -d '"' | tr -d ' ')
     INCREMENTED=$(echo "$CURRENT" | awk -F. -v OFS=. '{$NF += 1 ; print}')
     sed -i "s\version: $CURRENT\version: $INCREMENTED\g" "$CHART_PATH/Chart.yaml"
-    CHART_NAME=`cat "$CHART_PATH/Chart.yaml" | grep '^name:' | cut -d':' -f 2 | tr -d '"' | tr -d ' '`
+    CHART_NAME="$(cat "$CHART_PATH/Chart.yaml" | grep '^name:' | cut -d':' -f 2 | tr -d '"' | tr -d ' ')
     echo "Chart '$CHART_NAME' update from version '$CURRENT' to version '$INCREMENTED'"
     exit 0
 elif [ "$COMMAND" == "validate" ]; then
@@ -63,8 +63,8 @@ elif [ "$COMMAND" == "validate" ]; then
         exit 1
     fi
     CHART_REPO=${PASSTHRU[2]}
-    CURRENT=`cat "$CHART_PATH/Chart.yaml" | grep '^version:' | cut -d':' -f 2 | tr -d '"' | tr -d ' '`
-    CHART_NAME=`cat "$CHART_PATH/Chart.yaml" | grep '^name:' | cut -d':' -f 2 | tr -d '"' | tr -d ' '`
+    CURRENT="$(cat "$CHART_PATH/Chart.yaml" | grep '^version:' | cut -d':' -f 2 | tr -d '"' | tr -d ' ')
+    CHART_NAME="$(cat "$CHART_PATH/Chart.yaml" | grep '^name:' | cut -d':' -f 2 | tr -d '"' | tr -d ' ')
     PUBLISHED=$(helm search repo "$CHART_REPO"/"$CHART_NAME" -o json | cut -d '"' -f 8)
 
     if [ "$CHART_REPO" == "" ]; then
@@ -113,7 +113,7 @@ elif [ "$COMMAND" == "lookup" ]; then
         exit 1
     fi
     CHART_REPO=${PASSTHRU[2]}
-    CHART_NAME=`cat "$CHART_PATH/Chart.yaml" | grep '^name:' | cut -d':' -f 2 | tr -d '"' | tr -d ' '`
+    CHART_NAME="$(cat "$CHART_PATH/Chart.yaml" | grep '^name:' | cut -d':' -f 2 | tr -d '"' | tr -d ' ')
     echo $CHART_NAME
     PUBLISHED=$(helm search repo "$CHART_REPO"/"$CHART_NAME" -o json | cut -d '"' -f 8)
     if [ "$CHART_REPO" == "" ]; then
@@ -141,8 +141,8 @@ elif [ "$COMMAND" == "print" ]; then
         echo "Chart path was not provided"
         exit 1
     fi
-    CURRENT=`cat "$CHART_PATH/Chart.yaml" | grep '^version:' | cut -d':' -f 2 | tr -d '"' | tr -d ' '`
-    CHART_NAME=`cat "$CHART_PATH/Chart.yaml" | grep '^name:' | cut -d':' -f 2 | tr -d '"' | tr -d ' '`
+    CURRENT="$(cat "$CHART_PATH/Chart.yaml" | grep '^version:' | cut -d':' -f 2 | tr -d '"' | tr -d ' ')
+    CHART_NAME="$(cat "$CHART_PATH/Chart.yaml" | grep '^name:' | cut -d':' -f 2 | tr -d '"' | tr -d ' ')
     echo "Chart '$CHART_NAME' current version is '$CURRENT'"
     exit 0
 else
