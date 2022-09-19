@@ -72,6 +72,7 @@ elif [ "$COMMAND" == "validate" ]; then
         FOUND=$(helm search repo "$CHART_NAME" -o json | cut -d '/' -f 1 | cut -d '"' -f4)
         if [ "$PUBLISHED" == "[]" ]; then
             echo "Chart '$CHART_NAME' was not found on any repo"
+            exit 0
         else
             if [ "$CURRENT" == "$PUBLISHED" ]; then
                 echo "Chart '$CHART_NAME' was found in '$FOUND' repo"
@@ -89,6 +90,7 @@ elif [ "$COMMAND" == "validate" ]; then
     else
         if [ "$PUBLISHED" == "[]" ]; then
             echo "Chart '$CHART_NAME' was not found in '$CHART_REPO' repo"
+            exit 0
         else
             if [ "$CURRENT" == "$PUBLISHED" ]; then
                 if [ "$IGNORE" == true ]; then
