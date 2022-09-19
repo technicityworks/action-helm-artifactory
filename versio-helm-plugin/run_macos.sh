@@ -72,7 +72,6 @@ elif [ "$COMMAND" == "validate" ]; then
         FOUND=$(helm search repo "$CHART_NAME" -o json | cut -d '/' -f 1 | cut -d '"' -f4)
         if [ "$PUBLISHED" == "[]" ]; then
             echo "Chart '$CHART_NAME' was not found on any repo"
-            exit 3
         else
             if [ "$CURRENT" == "$PUBLISHED" ]; then
                 echo "Chart '$CHART_NAME' was found in '$FOUND' repo"
@@ -90,7 +89,6 @@ elif [ "$COMMAND" == "validate" ]; then
     else
         if [ "$PUBLISHED" == "[]" ]; then
             echo "Chart '$CHART_NAME' was not found in '$CHART_REPO' repo"
-            exit 3
         else
             if [ "$CURRENT" == "$PUBLISHED" ]; then
                 if [ "$IGNORE" == true ]; then
@@ -120,7 +118,6 @@ elif [ "$COMMAND" == "lookup" ]; then
         FOUND=$(helm search repo "$CHART_NAME" -o json | cut -d '/' -f 1 | cut -d '"' -f4)
         if [ "$PUBLISHED" == "[]" ]; then
             echo "Chart '$CHART_NAME' was not found any repo"
-            exit 3
         else
             echo "Chart '$CHART_NAME' was found in '$FOUND' repo"
             echo "Chart '$CHART_NAME' lastest publish version in '$FOUND' is '$PUBLISHED'"
@@ -128,7 +125,6 @@ elif [ "$COMMAND" == "lookup" ]; then
     else
         if [ "$PUBLISHED" == "[]" ]; then
             echo "Chart '$CHART_NAME' was not found on '$CHART_REPO' repo"
-            exit 3
         else
             echo "Chart '$CHART_NAME' lastest publish version in '$CHART_REPO' is '$PUBLISHED'"
         fi
